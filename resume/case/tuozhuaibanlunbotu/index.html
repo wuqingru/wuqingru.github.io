@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> New Document </title>
+  <meta charset="utf-8" />
+	<style>
+		/*body {background: #000;}*/
+		#box {width: 500px; height: 600px; border: 2px solid #666; margin: 20px auto;overflow: hidden;}
+		#box ul {width: 500px; height: 600px; padding: 0; margin: 0; position: relative;}
+		#box ul li {width: 500px; height: 600px; overflow: hidden; position: absolute; left: 0; top: 0; z-index: 1; opacity: 1;}
+		#box ul li img {width: 100%; height: 100%;}
+		#box li.current { z-index: 10;}
+		#box li.next { z-index: 5;}
+	</style>
+  <script src="mTween.js"></script>
+  <script src="tween.js"></script>
+ </head>
+
+ <body>
+	 <div id="box">
+		<ul>
+			<li class="current"><img src="img/2.jpg" /></li>
+			<li class="next"><img src="img/1.jpg" /></li>
+			<li><img src="img/3.jpg" /></li>
+			<li><img src="img/2.jpg" /></li>
+			<li><img src="img/1.jpg" /></li>
+			<li><img src="img/4.jpg" /></li>
+		</ul>
+	 </div>
+ </body>
+ 	<script>
+ 		var box = document.getElementById('box');
+ 		var lis = document.getElementsByTagName('li');
+ 		var num = 1;
+ 		var onOff = true;
+ 		for(var i=0;i<lis.length;i++){
+ 			lis[i].index = i;
+ 			lis[i].onmousedown = function(ev){
+ 				if(!onOff)return;
+ 				onOff = false;
+	 			var oldX = ev.clientX;
+	 			var oldY = ev.clientY;
+	 			
+	 			lis[this.index].onmouseup = function(ev){
+	 				
+	 				var newX = ev.clientX;
+	 				var newY = ev.clientY;
+	 				
+	 				if(newY>oldY&&Math.abs(newX-oldX)<Math.abs(newY-oldY)){
+	 					fn(this,'top',600);
+	 				}
+	 				if(newY<oldY&&Math.abs(newX-oldX)<Math.abs(newY-oldY)){
+	 					fn(this,'top',-600);
+	 				}
+					if(newX>oldX&&Math.abs(newX-oldX)>Math.abs(newY-oldY)){
+						fn(this,'left',500);
+					}
+					if(newX<oldX&&Math.abs(newX-oldX)>Math.abs(newY-oldY)){
+						fn(this,'left',-500);
+					}
+	 			};
+	 			
+	 			return false;
+	 		};
+ 			document.onkeydown = function(ev){
+ 				if(!onOff)return;
+ 				onOff = false;
+ 				switch(ev.keyCode){
+					case 37:
+					fn(lis[(num-1)%6],'left',-500);
+					break;
+					case 38:
+					fn(lis[(num-1)%6],'top',-600);
+					break;
+					case 39:
+					fn(lis[(num-1)%6],'left',500);
+					break;
+					case 40:
+					fn(lis[(num-1)%6],'top',600);
+					break;
+				}
+ 				
+ 				
+ 			};
+ 		}
+ 		function fn(obj,wh,num1){
+ 			mTween(obj,wh,num1,500,'linear',function(){
+				lis[(num-1)%6].className = '';
+				lis[(num-1)%6].style.cssText = '';
+				lis[num%6].className = 'current';
+				lis[(num+1)%6].className = 'next';
+				num++;
+				onOff = true;
+			});
+ 		}
+ 	
+	</script>
+</html>
+

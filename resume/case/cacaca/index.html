@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		body{
+			background: #000;
+		}
+		 div{
+			width: 100px;
+			height: 65px;
+			position: absolute;
+			background: gray;
+		}
+		.pic{
+			background: url(img/2.jpg) no-repeat;
+		}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var divs = document.getElementsByTagName('div');
+			var str = '';
+			var num = -1;
+			for(var i=0;i<81;i++){
+				if(i%9 == 0){
+					num++;
+				}
+				str += '<div style="left:'+i%9*110+'px;top:'+num*73+'px;background-position:'+-i%9*100+'px '+-num*75+'px"></div>';
+			}
+			document.body.innerHTML = str;
+			for(var i=0;i<81;i++){
+				divs[i].onmousemove = function(){
+					if(i%9 == 0){
+						num++;
+					}
+					this.className = 'pic';
+				};
+			}
+			
+			
+		</script>
+	</body>
+</html>

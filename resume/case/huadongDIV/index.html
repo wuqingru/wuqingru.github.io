@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 50px;
+				height: 50px;
+				background: red;
+				position: absolute;
+				top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="mTween.js" type="text/javascript" charset="utf-8"></script>
+		<script src="tween.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//生成div。
+			var str = '';
+			for(var i=0;i<20;i++){
+				str += '<div style="left:'+i*60+'px;"></div>';
+			}
+			document.body.innerHTML = str;
+			var divs = document.getElementsByTagName('div');
+			//设置div在上面的状态是真。
+			var onOff = true;
+			
+			//点击，如果真就执行top值增加的代码，反之则执行top值减少的代码。
+			document.onclick = function(){
+				
+				
+				if(onOff){
+					for(var i=0;i<20;i++){
+						fn(i,i*100);
+					}
+					onOff = false;
+					
+				}else{
+					for(var i=0;i<20;i++){
+						fn1(i,i*100);
+					}
+					onOff = true;
+					
+				}
+				
+			};
+			//封装函数。使用延时定时器top值增加。
+			function fn(n,top){
+				setTimeout(function(){
+					mTween(divs[n],'top',500,600,'linear');
+				},top);
+			}
+			//封装函数。使用延时定时器top值减少。
+			function fn1(n,top){
+				setTimeout(function(){
+					mTween(divs[n],'top',20,600,'linear');
+				},top);
+			}
+		</script>
+	</body>
+</html>

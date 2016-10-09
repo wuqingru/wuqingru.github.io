@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				text-align: center;
+				line-height: 100px;
+				font-size: 60px;
+			}
+			input{
+				width: 200px;
+				height: 50px;
+				font-size: 40px;
+				line-height: 50px;
+				text-align: center;
+				margin-top: 25px;
+				color: greenyellow;
+				background: blueviolet;
+				border: 2px solid blue;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" id="btn" value="大V" />
+		<script type="text/javascript">
+		var btn = document.getElementById('btn');
+		var num = 0;
+		var len = 9;
+		var a = 0;
+		btn.onclick = function(){
+			for(var i=0;i<len;i++){
+				if(i<len/2){
+					num++;
+				}else{
+					num--;
+				}
+				document.body.innerHTML += '<div style="left:'+i*110+'px;top:'+num*110+'px;">'+i+'</div>';
+			}
+		};
+		</script>
+	</body>
+</html>
