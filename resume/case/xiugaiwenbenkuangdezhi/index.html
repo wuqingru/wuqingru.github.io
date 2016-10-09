@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			ul{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				width: 400px;
+				background: pink;
+			}
+			p{
+				margin: 0;
+				padding: 0;
+			}
+			li{
+				font-size: 30px;
+				border-bottom: 1px solid black;
+				position: relative;
+				height: 40px;
+			}
+			img{
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				top: 0;
+				right: 160px;
+			}
+			input{
+				height: 28px;
+				font-size: 20px;
+				
+			}
+			div{
+				display: none;
+			}
+			.show{
+				display: block;
+			}
+			.no{
+				display: none;
+			}
+			#text{
+				width: 200px;
+			}
+			.btn{
+				width: 70px;
+				height: 28px;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<p>
+					<span>
+						妙味实体课程
+					</span>
+					<img src="pen.png"/>
+				</p>
+				<div>
+					<input type="text" id="text" value="" />
+					<input type="button" value="保存" class="btn"/>
+					<input type="button" value="取消" class="btn"/>
+				</div>
+			</li>
+			<li>
+				<p>
+					<span>
+						妙味实体课程
+					</span>
+					<img src="pen.png"/>
+				</p>
+				<div>
+					<input type="text" id="text" value="" />
+					<input type="button" value="保存" class="btn"/>
+					<input type="button" value="取消" class="btn"/>
+				</div>
+			</li>
+			<li>
+				<p>
+					<span>
+						妙味实体课程
+					</span>
+						
+					<img src="pen.png"/>
+				</p>
+				<div>
+					<input type="text" id="text" value="" />
+					<input type="button" value="保存" class="btn"/>
+					<input type="button" value="取消" class="btn"/>
+				</div>
+			</li>
+		</ul>
+		
+		
+		<script type="text/javascript">
+			//获取元素li。
+			var lis = document.getElementsByTagName('li');
+			//在循环里调用函数，传入i值。
+			for(var i=0;i<lis.length;i++){
+				fn(i);
+			}
+			//封装函数，形参里设置n代替li的位置。
+			function fn(n){
+				//从li里获取元素。
+				var imgs = lis[n].getElementsByTagName('img');
+				var inputs = lis[n].getElementsByTagName('input');
+				var ps = lis[n].getElementsByTagName('p');
+				var divs = lis[n].getElementsByTagName('div');
+				var spans = lis[n].getElementsByTagName('span');
+				//点击图片，自己隐藏，显示输入框。
+				imgs[0].onclick = function(){
+					ps[0].className = 'no';
+					divs[0].className = 'show';
+				};
+				//点击取消，默认样式显示，输入框隐藏。
+				inputs[2].onclick = function(){
+					ps[0].className = '';
+					divs[0].className = '';
+				};
+				//点击保存，输入框隐藏，默认样式显示，内容替换成输入内容。
+				inputs[1].onclick = function(){
+					//判断如果输入为空，弹出对话框并阻止代码运行。
+					if(inputs[0].value == ''){
+						alert('输入内容不能为空');
+						return;
+					}
+					divs[0].className = '';
+					ps[0].className = '';
+					spans[0].innerHTML = inputs[0].value;
+				};
+			}
+			
+		</script>
+	</body>
+</html>

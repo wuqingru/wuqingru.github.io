@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			li{
+				height: 50px;
+				font-size: 30px;
+			}
+			input{
+				width: 50px;
+				height: 40px;
+				font-size: 30px;
+			}
+			div{
+				line-height: 50px;
+				font-size: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="list">
+			<li>
+				<input type="button" value="-" />
+				<span>0</span>
+				<input type="button" value="+" />
+				单价：<i>12.5</i>元     小计:
+				<strong>0</strong>元
+			</li>
+			<li>
+				<input type="button" value="-" />
+				<span>0</span>
+				<input type="button" value="+" />
+				单价：<i>10.5</i>元     小计:
+				<strong>0</strong>元
+			</li>
+			<li>
+				<input type="button" value="-" />
+				<span>0</span>
+				<input type="button" value="+" />
+				单价：<i>8.5</i>元     小计:
+				<strong>0</strong>元
+			</li>
+			<li>
+				<input type="button" value="-" />
+				<span>0</span>
+				<input type="button" value="+" />
+				单价：<i>8</i>元     小计:
+				<strong>0</strong>元
+			</li>
+			<li>
+				<input type="button" value="-" />
+				<span>0</span>
+				<input type="button" value="+" />
+				单价：<i>14.5</i>元     小计:
+				<strong>0</strong>元
+			</li>
+		</ul>
+		<div>
+			商品合计共：<span>0</span>件，共花费了<strong>0</strong>元。
+		</div>
+		<div>
+			其中最贵的商品单价是<span>0</span>元。
+		</div>
+		<script type="text/javascript">
+			//获取元素。
+			var lis = document.getElementsByTagName('li');
+			var list =document.getElementById('list');
+			//从ul下获取元素。
+			var sps = list.getElementsByTagName('span');
+			var iis = list.getElementsByTagName('i');
+			var strs = list.getElementsByTagName('strong');
+			//获取元素。
+			var divs = document.getElementsByTagName('div');
+			//从div下获取元素。
+			var span1 = divs[0].getElementsByTagName('span');
+			var strong = divs[0].getElementsByTagName('strong');
+			var span2 = divs[1].getElementsByTagName('span');
+			//在循环里调用函数。
+			for(var i=0;i<lis.length;i++){
+				fn(i);
+			}
+			//封装函数。
+			function fn(n){
+				//从每一个li里获取元素。
+				var inps = lis[n].getElementsByTagName('input');
+				var spans = lis[n].getElementsByTagName('span');
+				var is = lis[n].getElementsByTagName('i');
+				var strongs = lis[n].getElementsByTagName('strong');
+				var num = 0;
+				//点击减少，判断当小于0时，一直等于零。
+				inps[0].onclick = function(){
+					num--;
+					if(num<0){
+						num = 0;
+					}
+					spans[0].innerHTML = num;
+					//num*单价。
+					strongs[0].innerHTML = num*(is[0].innerHTML);
+					tab();
+				};
+				//点击增加。
+				inps[1].onclick = function(){
+					num++;
+					spans[0].innerHTML = num;
+					//num*单价。
+					strongs[0].innerHTML = num*(is[0].innerHTML);
+					tab();
+				};
+			}
+			function tab(){
+				//设置变量代替内容，性能优化。
+				var a = 0;
+				var b = 0;
+				var c = 0;
+				for(var i=0;i<lis.length;i++){
+					//所有数量相加。
+					a += Number(sps[i].innerHTML);
+					//所有小计相加。
+					b += parseFloat(strs[i].innerHTML);
+					//判断当数量不为零且其单价大于变量时，就把值赋给变量。
+					if(sps[i].innerHTML != 0 && parseFloat(iis[i].innerHTML)>c){
+						c = parseFloat(iis[i].innerHTML);
+					}
+				}
+				span1[0].innerHTML = a;
+				strong[0].innerHTML = b;
+				span2[0].innerHTML = c;
+			}
+		</script>
+	</body>
+</html>

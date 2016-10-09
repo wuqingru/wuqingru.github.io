@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 200px;
+				height: 300px;
+				position: absolute;
+			}
+			#box1{
+				z-index: 100;
+			}
+			#box2{
+				width: 200px;
+				height: 300px;
+				background: url(img/3.jpg) no-repeat;
+				background-size: 100%;
+			}
+			#box1 p{
+				padding: 0;
+				margin: 0;
+				width: 200px;
+				height: 300px;
+				background: url(img/3.jpg) no-repeat;
+				background-size: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box1">
+			<p></p>
+		</div>
+		<div id="box2"></div>
+		<script type="text/javascript">
+			var divs = document.getElementsByTagName('div');
+			var p = document.getElementsByTagName('p')[0];
+			
+			divs[0].onmousedown = function(ev){
+				var disx = ev.clientX - this.offsetLeft;
+				var disy = ev.clientY - this.offsetTop;
+				
+				document.onmousemove = function(ev){
+					var X = ev.clientX - disx;
+					var Y = ev.clientY - disy;
+					divs[1].style.display = 'block';
+					divs[0].style.left = X + 'px';
+					divs[0].style.top = Y + 'px';
+					p.style.display = 'none';
+					divs[0].style.border = '5px dashed black';
+				}
+				document.onmouseup = function(ev){
+					var X = ev.clientX - disx;
+					var Y = ev.clientY - disy;
+					document.onmousemove = null;
+					p.style.display = 'block';
+					divs[0].style.border = '';
+					divs[0].style.backgroundSize = '100%';
+					divs[1].style.display = 'none';
+					divs[1].style.left = X + 'px';
+					divs[1].style.top = Y + 'px';
+					document.onmouseup = null;
+				}
+				
+			}
+			
+			
+		</script>
+	</body>
+</html>

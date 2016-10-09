@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			#pic{
+				width: 1000px;
+				height: 800px;
+				padding-top: 50px;
+				background: url(img/捕获.PNG) no-repeat;
+				background-size: 100%;
+			}
+			
+			#box{
+				width: 30px;
+				height: 560px;
+				border: 2px solid white;
+				position: relative;
+				float: left;
+				margin-left: 10px;
+			}
+			#div1{
+				width: 30px;
+				height: 40px;
+				background: #00FF99;
+				position: absolute;
+			}
+			#con{
+				width: 450px;
+				height: 560px;
+				float: left;
+				line-height: 30px;
+				font-size: 24px;
+				background: #e0e0e1;
+				position: relative;
+				margin-left: 420px;
+				overflow: hidden;
+			}
+			#con1{
+				width: 450px;
+				text-align: center;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="pic">
+			<div id="con">
+				<div id="con1">
+					小幸运（Cover 田馥甄）<br>
+					专辑：小幸运<br>
+					歌手：金玟岐<br>
+					来源：本地音乐<br>
+					作曲 : JerryC<br>
+					作词 : 徐世珍，吴辉福<br>
+					原唱：田馥甄<br>
+					翻唱：金玟岐<br>
+					我听见雨滴落在青青草地<br>
+					我听见远方下课钟声响起<br>
+					可是我没有听见你的声音<br>
+					认真 呼唤我姓名<br>
+					爱上你的时候还不懂感情<br>
+					离别了才觉得刻骨 铭心<br>
+					为什么没有发现遇见了你<br>
+					是生命最好的事情<br>
+					也许当时忙着微笑和哭泣<br>
+					忙着追逐天空中的流星<br>
+					人理所当然的忘记<br>
+					是谁风里雨里一直默默守护在原地<br>
+					原来你是我最想留住的幸运<br>
+					原来我们和爱情曾经靠得那么近<br>
+					那为我对抗世界的决定<br>
+					那陪我淋的雨<br>
+					一幕幕都是你 一尘不染的真心<br>
+					与你相遇 好幸运<br>
+					可我已失去为你泪流满面的权利<br>
+					但愿在我看不到的天际<br>
+					你张开了双翼<br>
+					遇见你的注定<br>
+					她会有多幸运<br>
+					多幸运<br>
+					最想留住的幸运<br>
+					原来我们和爱情曾经靠得那么近<br>
+					那为我对抗世界的决定<br>
+					那陪我淋的雨<br>
+					一幕幕都是你 一尘不染的真心<br>
+					与你相遇 好幸运<br>
+					可我已失去为你泪流满面的权利<br>
+					但愿在我看不到的天际<br>
+					你张开了双翼<br>
+					遇见你的注定<br>
+					她会有多幸运<br>
+				</div>
+			</div>
+			<div id="box">
+				<div id="div1"></div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			var box = document.getElementById('box');
+			var div1 = document.getElementById('div1');
+			var con1 = document.getElementById('con1');
+			var maxy = box.clientHeight - div1.offsetHeight;
+			var innerY = con.clientHeight - con1.offsetHeight;
+			
+			div1.onmousedown = function(ev){
+				var disy = ev.clientY - getPos(this).top;;
+				document.onmousemove = function(ev){
+					var y = ev.clientY - disy - 50;
+					document.onmousewheel = function(ev){
+						if(ev.wheelDelta<0){
+							y--;
+						}else{
+							y++;
+						}
+						return false;
+					}
+					if(y<0){
+						y = 0;
+					}
+					if(y>maxy){
+						y = maxy;
+					}
+					div1.style.top = y+'px';
+					con1.style.top = y/maxy*innerY + 'px';
+					
+					
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+					document.onmouseup = null;
+				}
+				
+			}
+			
+			function getPos(obj){
+				return obj.getBoundingClientRect();
+			}
+					
+			
+			
+		</script>
+		
+	</body>
+</html>

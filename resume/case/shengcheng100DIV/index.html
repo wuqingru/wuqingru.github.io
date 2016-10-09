@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 100px;
+				height: 100px;
+				background: red;
+				line-height: 100px;
+				text-align: center;
+				font-size: 40px;
+				position: absolute;
+			}
+			input{
+				width: 200px;
+				height: 50px;
+				font-size: 40px;
+				line-height: 50px;
+				text-align: center;
+				margin-top: 25px;
+				color: greenyellow;
+				background: blueviolet;
+				border: 2px solid blue;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" id="btn" value="放大招~" />
+		<script type="text/javascript">
+		var str = '';
+		var num = 0;
+		var btn = document.getElementById('btn');
+		var divs = document.getElementsByTagName('div');
+		var arr = ['blue','yellow','red','pink']
+		btn.onclick = function(){
+			for(var i=0;i<100;i++){  
+				if(i%10 == 0){
+					num++;
+				};
+				str += '<div style="left: '+i%10*110+'px;top:'+num*110+'px;background:'+arr[i%arr.length]+'">'+ i +'</div>';
+			};
+			document.body.innerHTML = str + '<input type="button" id="btn" value="放大招~" />';
+		};
+		</script>
+	</body>
+</html>

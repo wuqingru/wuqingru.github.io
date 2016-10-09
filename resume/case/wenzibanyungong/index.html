@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		p,ul{
+			margin: 0;
+			padding: 0;
+		}
+		a{
+			text-decoration: none;
+		}
+		li{
+			list-style: none;
+		}
+		div{
+			float:left;
+		}
+		#left{
+			margin-left: 100px;
+			background: #00FF99;
+		}
+		#left,#right{
+			width: 400px;
+			height: 300px;
+			padding: 20px;
+			border: 5px solid #940032;
+			border-radius: 50px;
+			position: relative;
+			box-shadow: 0 0 10px 10px;
+		}
+		#right{
+			border-color: #4169E1;
+			background: #00BFFF;
+		}
+		#left span,#right span{
+			width: 80px;
+			height: 40px;
+			border-radius: 5px;
+			background-color: #4169E1;
+			position: absolute;
+			bottom: 5px;
+			left: 50%;
+			margin-left: -40px; 
+			line-height: 40px;
+			text-align: center;
+			color: white;
+		}
+		#right span{
+			background-color: #940032;
+		}
+		#center{
+			width: 100px;
+			height: 240px;
+			padding: 30px;
+			position: relative;
+		}
+		#center a{
+			width: 100px;
+			height: 100px;
+			background-color: yellowgreen;
+			line-height: 100px;
+			text-align: center;
+			display: block;
+			margin-top: 15px;
+			border-radius: 5px;
+			color: white;
+			font-size: 50px;
+			
+		}
+		#center ul{
+			position: absolute;
+			bottom: 0px;
+		}
+		#center li{
+			width: 15px;
+			height: 15px;
+			background-color: #808080;
+			float: left;
+			margin: 0 3px;
+			border-radius: 50%;
+		}
+		p{
+			font-size: 26px;
+		}
+	</style>
+</head>
+<body>
+	<div id="left">
+		<p>但见旁人谈情何引诱 问到何时葡萄先熟透,你要静候 再静候 就算失收 始终要守,日后 尽量别教今天的泪白流,留低 击伤你的石头 从错误里吸收,也许 丰收 月份尚未到你也得接受,或者要到你将爱酿成醇酒,时机先至熟透,想想天的一边 亦有个某某 在等候,一心只等葡萄熟透 尝杯酒</p>
+		<span></span>
+	</div>
+	<div id="center">
+		<a href="javascript:;" id="toLeft">→</a>
+		<a href="javascript:;" id="toRight">←</a>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<div id="right">
+		<p></p>
+		<span></span>
+	</div>
+	<script type="text/javascript">
+		//获取元素
+		var lis = document.getElementsByTagName('li');
+		var toLeft = document.getElementById('toLeft');
+		var toRight = document.getElementById('toRight');
+		var left = document.getElementById('left');
+		var p = left.getElementsByTagName('p')[0];
+		var span = left.getElementsByTagName('span')[0];
+		var right = document.getElementById('right');
+		var span1 = right.getElementsByTagName('span')[0];
+		var p1 = right.getElementsByTagName('p')[0];
+		var str = p.innerHTML;
+		var num = 0;
+		var num1 = 0;
+		//初始化
+		span.innerHTML = str.length+'/'+str.length;
+		span1.innerHTML = '0/'+str.length;
+		//点击向右的按钮
+		toLeft.onclick = function(){
+			if(num1 != 0){
+				num = 0;
+				num1 = 0;
+			}
+			if(num>=str.length){
+				alert('没有内容了')
+				return;
+			}
+			if(num>0&&num<=str.length){
+				return;
+			}
+			//开启定时器，改变点的颜色，并改变左右的内容。
+			var timer = setInterval(function(){
+				for(var i=0;i<lis.length;i++){
+					for(var i=0;i<lis.length;i++){
+						lis[i].style.background = '';
+					}
+					lis[num%i].style.background = 'yellow';
+				}
+				p1.innerHTML += str[num];
+				num++;
+				var str1 = str.substring(num);
+				p.innerHTML = str1;
+				span.innerHTML = (str.length-num)+'/'+str.length;
+				span1.innerHTML = num+'/'+str.length;
+				if(num>=str.length){
+					clearInterval(timer);
+				}
+				
+			},30)
+			
+		};
+		//点击向左的按钮
+		toRight.onclick = function(){
+			
+			if(num == 0||num1>=str.length){
+				alert('没有内容了');
+				return;
+			}
+			if(num1>0&&num1<=str.length){
+				return;
+			}
+			//初始化
+			p1.innerHTML = str;
+			p.innerHTML = '';
+			//开启定时器，改变点的颜色，并改变左右的内容。
+			var timer = setInterval(function(){
+				p.innerHTML += str[num1];
+				num1++;
+				var str1 = str.substring(num1);
+				p1.innerHTML = str1;
+				span1.innerHTML = (str.length-num1)+'/'+str.length;
+				span.innerHTML = num1+'/'+str.length;
+				if(num1>=str.length){
+					clearInterval(timer);
+				}
+				for(var i=0;i<lis.length;i++){
+					for(var i=0;i<lis.length;i++){
+						lis[i].style.background = '';
+					}
+					lis[num1%i].style.background = 'yellow';
+				}
+			},30)
+		}
+		
+		
+	</script>
+</body>
+</html>

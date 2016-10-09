@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 700px;
+				height: 500px;
+				margin: 0 auto;
+				position: relative;
+			}
+			ul{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				height: 500px;
+			}
+			li{
+				width: 80px;
+				height: 69px;
+				line-height: 71px;
+				background: pink;
+				text-align: center;
+				border: 1px solid green;
+				opacity: .7;
+				color: red;
+				font-size: 24px;
+				font-weight: bold;
+			}
+			#list1{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			#list2{
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+			img{
+				width: 100%;
+				height: 100%;
+			}
+			li .color{
+				background: purple;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<ul id="list1">
+				<li style="background: purple;">巧克力</li>
+				<li>冰棒</li>
+				<li>圣代</li>
+				<li>牛肉粒</li>
+				<li>酸奶</li>
+				<li>棉花糖</li>
+				<li>鱿鱼圈</li>
+			</ul>
+			<ul id="list2">
+				<li>公主1</li>
+				<li>公主2</li>
+				<li>公主3</li>
+				<li>公主4</li>
+				<li>公主5</li>
+				<li>公主6</li>
+				<li>公主7</li>
+			</ul>
+			<img src="img/0.jpg" id="img"/>
+		</div>
+		<script type="text/javascript">
+		//使用封装函数的办法获取元素。
+			var box = id('box');
+			var list1 = id('list1');
+			var list2 = id('list2');
+			var img = id('img');
+			var lis = tagname('li');
+			var arr = ['0.jpg','1.jpg','2.jpg','3.jpg','4.jpg'];
+			function id(id){
+				return document.getElementById(id);
+			}
+			function tagname(tagname){
+				return document.getElementsByTagName(tagname);
+			}
+			var timer;
+			var num = 0;
+			play();
+			//移入清除定时器。
+			box.onmouseover = function(){
+				clearInterval(timer);
+			};
+			//移出开启定时器。
+			box.onmouseout = function(){
+				play();
+			}
+			//移入改变焦点颜色和图片，并记录当前移入的位置。
+			for(var i=0;i<lis.length;i++){
+				lis[i].index = i;
+				lis[i].onmouseover = function(){
+					for(var i=0;i<lis.length;i++){
+						lis[i].style.background = '';
+					}
+					this.style.background = 'purple';
+					img.src = 'img/'+arr[this.index%arr.length];
+					num = this.index;
+				};
+			}
+			//封装函数。
+			function play(){
+				//var num = 0;
+				timer = setInterval(function(){
+					if(num<=lis.length/2-1){
+						num++;
+						if(num==lis.length/2){
+							num = lis.length-1;
+						}
+					}else{
+						num--;
+						if(num<=lis.length/2-1){
+							num = 0;
+						}
+					}
+					
+					
+					for(var i=0;i<lis.length;i++){
+						lis[i].style.background = '';
+					}
+					lis[num].style.background = 'purple';
+					img.src = 'img/'+arr[num%arr.length];
+					lis[num].onmouseover();
+				},1000)
+				
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			ul{
+				margin: 0 auto;
+				padding: 0;
+				list-style: none;
+				height: 500px;
+				width: 600px;
+			}
+			li{
+				width: 298px;
+				height: 248px;
+				float: left;
+				border: 1px solid green;
+				position: relative;
+			}
+			img{
+				width: 100%;
+				height: 100%;
+			}
+			p{
+				margin: 0;
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				font-size: 30px;
+				font-weight: bold;
+				color: purple;
+				text-align: center;
+				position: absolute;
+				left: 0;
+				bottom: 0;
+			}
+			div{
+				width: 300px;
+				height: 40px;
+				margin: 10px auto;
+			}
+			input{
+				background: #00FF99;
+				height: 40px;
+				width: 140px;
+				border: none;
+				border-radius: 5px;
+				font-size: 30px;
+				text-align: center;
+				line-height: 40px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="">
+			<input type="button" value="从大到小" />
+			<input type="button" value="打乱顺序" />
+		</div>
+		<ul>
+			<li>
+				<img src="img/1.jpg"/>
+				<p>1-Eason</p>
+			</li>
+			<li>
+				<img src="img/2.jpg"/>
+				<p>2-Eason</p>
+			</li>
+			<li>
+				<img src="img/3.jpg"/>
+				<p>3-Eason</p>
+			</li>
+			<li>
+				<img src="img/4.jpg"/>
+				<p>4-Eason</p>
+			</li>
+		</ul>
+		<script type="text/javascript">
+			//获取元素
+			var inps = document.getElementsByTagName('input');
+			var lis = document.getElementsByTagName('li');
+			var imgs = document.getElementsByTagName('img');
+			var ps = document.getElementsByTagName('p');
+			//设置二维数组
+			var arr = [
+			['img/1.jpg','1-Eason'],
+			['img/2.jpg','2-Eason'],
+			['img/3.jpg','3-Eason'],
+			['img/4.jpg','4-Eason']
+			]
+			var onOff = true;
+			//点击左边按钮，改变顺序。
+			inps[0].onclick = function(){
+				//用开关控制按钮的内容。
+				if(onOff){
+					inps[0].value = '从小到大';
+				}else{
+					inps[0].value = '从大到小';
+				}
+				arr.sort(function(a,b){
+					if(onOff){
+						return b[0].charAt(4) -  a[0].charAt(4);
+					}else{
+						return a[0].charAt(4) - b[0].charAt(4);
+					}
+				})
+				onOff = !onOff;
+				//反转数组
+				//arr1.reverse()
+				
+				//调用函数
+				fn();
+			}
+			//点击打乱顺序
+			inps[1].onclick = function(){
+				//给数组随机排序
+				arr.sort(function(){
+					return Math.random()-0.5;
+				})
+				//调用函数
+				fn();
+			}
+			
+			function fn(){
+				//根据数组改变图片和内容
+				for(var i=0;i<imgs.length;i++){
+					imgs[i].src = arr[i][0];
+					ps[i].innerHTML = arr[i][1];
+				}
+			}
+			
+		</script>
+	</body>
+</html>

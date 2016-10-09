@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			ul{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				width: 500px;
+				margin: 0 auto;
+			}
+			li{
+				height: 80px;
+				line-height: 80px;
+				
+			}
+			input{
+				width: 20px;
+				height: 20px;
+			}
+			
+			label{
+				width: 100px;
+				margin-left: 380px;
+				margin-top: 20px;
+			}
+			.yellow{
+				background-color: yellow;
+			}
+			.red{
+				background-color: red;
+			}
+			.black{
+				background-color: black;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<input type="checkbox" />
+			</li>
+			<li>
+				<input type="checkbox" />
+			</li>
+			<li>
+				<input type="checkbox" />
+			</li>
+			<li>
+				<input type="checkbox" />
+			</li>
+			<li>
+				<input type="checkbox" />
+			</li>
+		</ul>
+		<label for="all">
+			<input type="checkbox" name="" id="all">全选
+		</label>
+		<script type="text/javascript">
+		
+			//获取元素。
+			var lis = document.getElementsByTagName('li');
+			var all= document.getElementById('all');
+			var checkbox = document.getElementsByTagName('ul')[0].getElementsByTagName('input')
+			
+			//声明颜色的数组。
+			var arr = ['red','yellow'];
+			
+			for(var i=0;i<lis.length;i++){
+				//初始化li的颜色。
+				lis[i].className = arr[i%arr.length];
+				//建立索引值。
+				lis[i].index = i;
+				//移入切换颜色。
+				lis[i].onmouseover = function(){
+					
+					this.className = 'black';
+				};
+				//移除切换到初始化颜色。
+				lis[i].onmouseout = function(){
+					
+					this.className = arr[this.index%arr.length];
+					
+					
+				};
+				
+				checkbox[i].n=i;
+				checkbox[i].onchange=function(){
+					//如果返回值为真，全选被选中。
+					all.checked = isCheckedAll();
+					//判断如果当前被选中，切换颜色。否则清空背景色，给当前加上移入时的颜色。
+					if(this.checked){
+						lis[this.n].style.background = 'green';
+					}else{
+						lis[this.n].style.background = '';
+						lis[this.n].className = 'black';
+						
+					}
+					
+				};
+				//判断如果全选被选中，所有li切换颜色。否则所有li切换初始化颜色。
+				all.onchange = function(){
+					for(var i=0;i<lis.length;i++){
+						checkbox[i].checked = this.checked;
+						if(this.checked){
+							lis[i].style.background = 'green';
+							
+						}else{
+							lis[i].style.background = '';
+							lis[i].className = arr[i%arr.length];
+							
+						}
+					}
+					
+				};
+			}
+			//封装函数。如果有一个不被选中，返回值为假；全选中，返回值为真。
+			function isCheckedAll(){
+				for(var i=0;i<checkbox.length;i++){	
+					if(!checkbox[i].checked){
+						return false;
+					}
+				}
+				return true;
+			}
+		</script>
+	</body>
+</html>
