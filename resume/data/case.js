@@ -24,14 +24,14 @@ var casees = [
 					publishTime:"2016-09-20 10:08",
 					caseThumbnail:"images/lianxiGIF/shezhiDIV.gif",
 					caseDescription:"属性操作、图片切换、短信属性操作<br>图片切换、短信",
-					caseWebsite:"wuqingru.github.io/resume/case/shezhiDIV"
+					caseWebsite:"case/shezhiDIV"
 				},
 				{
 					caseTitle:"模拟手机短信发送",
 					publishTime:"2016-09-20 10:08",
 					caseThumbnail:"images/lianxiGIF/monishoujiduanxin.gif",
 					caseDescription:"描述：这是我完成的一个小案例，综合涉及到的知识点是判断、字符串拼接，以及布局方面的小技巧，比如提交留言后，A用户在左，B用户在右"
-					,caseWebsite:"wuqingru.github.io/resume/case/monishoujiduanxin"
+					,caseWebsite:"case/monishoujiduanxin"
 				}
 			]
 		},
